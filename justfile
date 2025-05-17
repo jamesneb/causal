@@ -49,3 +49,16 @@ clean:
     cd agent && cargo clean
     cd backend && cargo clean
     cd frontend && rm -rf node_modules .svelte-kit/build
+
+dev-backend: cd backend && cargo watch -x run
+
+dev-frontend: 
+    cd frontend && pnpm dev 
+
+build-lambda-layer:
+    cd agent && cargo lambda build --release --output-format zip
+
+test-all:
+    cd agent && cargo test
+    cd backend && cargo test
+    cd frontend && pnpm test
