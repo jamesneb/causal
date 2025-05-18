@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  rust:
-    name: Rust
+  rust-backend:
+    name: Backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,25 +17,30 @@ jobs:
           components: clippy, rustfmt
       - uses: Swatinem/rust-cache@v2
       - name: Check formatting
-        run: cargo fmt --all -- --check
+        run: cd backend && cargo fmt --all -- --check
       - name: Clippy
-        run: cargo clippy --all-targets -- -D warnings
+        run: cd backend && cargo clippy --all-targets -- -D warnings
       - name: Test
-        run: cargo test
+        run: cd backend && cargo test
 
   frontend:
     name: Frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with: 
+        version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+          cache: 'pnpm'
           cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
-        run: cd frontend && npm ci
+        run: cd frontend && pnpm install --frozen-lockfile
+      - name: Lint
+        run: cd frontend && pnpm run lint
       - name: Check
-        run: cd frontend && npm run check
+        run: cd frontend && pnpm run check
       - name: Build
-        run: cd frontend && npm run build
+        run: cd frontend && pnpm run build
