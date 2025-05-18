@@ -62,3 +62,15 @@ test-all:
     cd agent && cargo test
     cd backend && cargo test
     cd frontend && pnpm test
+# Add these to your justfile
+
+# Update project name
+rename-project name:
+    @echo "Updating project name to: {{name}}"
+    @echo '{"name": "{{name}}", "version": "0.1.0"}' > project-config.json
+    @./tools/scripts/sync-project-config.py
+    @echo "Project renamed successfully!"
+
+# Create a new component
+create-component path name:
+    @./tools/scripts/create-component.sh {{path}} {{name}}

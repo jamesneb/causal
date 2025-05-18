@@ -1,1 +1,3 @@
-[toolchain]\nchannel="stable"\ncomponents = ["rustfmt","clippy"]
+[toolchain]
+channel = "stable"
+components = ["rustfmt", "clippy"]
