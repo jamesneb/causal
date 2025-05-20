@@ -12,8 +12,21 @@ mod minimal_deps;
 
 pub use asm_opt::{is_cold_start_asm, prefetch_critical_memory, optimized_spin_wait, fast_memcpy, hardware_crc32};
 pub use lazy_init::{Lazy, ConditionalLazy, LazyComponents, env_conditional};
-pub use preload::preload_components;
+pub use preload::{preload_components, Preloadable, PRELOAD_COMPLETED};
 pub use minimal_deps::MinimalDependencyLoader;
+
+// Re-export lambda-specific components when the lambda feature is enabled
+#[cfg(feature = "lambda")]
+pub use preload::lambda::{
+    LambdaRuntimePreloader, 
+    NetworkPreloader, 
+    LibraryPreloader, 
+    AwsSdkPreloader, 
+    LambdaExtensionApiPreloader
+};
+
+#[cfg(feature = "lambda")]
+pub use minimal_deps::lambda::init_dependency_loader;
 
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::time::{Duration, Instant};

@@ -348,8 +348,11 @@ mod tests {
     
     #[test]
     fn benchmark_cold_start_detection() {
+        // Get access to the private static
+        static COLD_START: AtomicBool = AtomicBool::new(true);
+        
         // Reset for benchmarking
-        IS_COLD_START.store(true, Ordering::SeqCst);
+        COLD_START.store(true, Ordering::SeqCst);
         
         // Benchmark ASM version
         let start = Instant::now();
@@ -357,11 +360,11 @@ mod tests {
         let asm_duration = start.elapsed();
         
         // Reset for standard version
-        IS_COLD_START.store(true, Ordering::SeqCst);
+        COLD_START.store(true, Ordering::SeqCst);
         
         // Benchmark standard version
         let start = Instant::now();
-        let _ = IS_COLD_START.swap(false, Ordering::SeqCst);
+        let _ = COLD_START.swap(false, Ordering::SeqCst);
         let std_duration = start.elapsed();
         
         println!(

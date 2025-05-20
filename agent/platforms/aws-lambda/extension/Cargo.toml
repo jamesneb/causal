@@ -25,6 +25,7 @@ crc32fast = "1.3"
 fastrand = "2.0"
 futures = "0.3"
 memmap2 = "0.7"
+agent-core = { path = "../../../core/lib", features = ["lambda", "minimal_deps", "lambda_extension"] }
 
 [profile.release]
 lto = "fat"         # Link-time optimization
