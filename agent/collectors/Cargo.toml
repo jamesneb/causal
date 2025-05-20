@@ -1,0 +1,24 @@
+[package]
+name = "causal-collectors"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+anyhow = { workspace = true }
+async-trait = "0.1"
+futures = "0.3"
+
+# Internal dependencies
+agent-core = { path = "../core/lib" }
+
+[features]
+default = ["aws", "http", "database", "system"]
+aws = []
+http = []
+database = []
+system = []
+minimal_deps = []
