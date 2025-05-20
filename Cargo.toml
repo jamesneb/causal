@@ -4,9 +4,6 @@ members = [
     "agent/common",
     "agent/platforms/aws-lambda/extension",
     "agent/platforms/aws-lambda/discovery",
-    "backend/api",
-    "backend/ingestion",
-    "backend/correlation",
 ]
 resolver = "2"
 [workspace.dependencies]
