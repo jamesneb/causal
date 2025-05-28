@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Causeway Lambda Auto-Discovery and Instrumentation
+
+Parameters:
+  AgentLayerARN:
+    Type: String
+    Description: ARN of the Causeway Lambda Extension layer
+
+Resources:
+  LambdaDiscoveryRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: LambdaDiscoveryPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lambda:ListFunctions
+                  - lambda:GetFunction
+                  - lambda:UpdateFunctionConfiguration
+                Resource: '*'
+
+  LambdaDiscoveryFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: bootstrap
+      Runtime: provided.al2
+      Role: !GetAtt LambdaDiscoveryRole.Arn
+      Code:
+        S3Bucket: causeway-artifacts
+        S3Key: lambda-discovery/bootstrap.zip
+      Timeout: 300
+      MemorySize: 256
+      Environment:
+        Variables:
+          AGENT_LAYER_ARN: !Ref AgentLayerARN
+
+  ScheduledDiscovery:
+    Type: AWS::Events::Rule
+    Properties:
+      ScheduleExpression: rate(15 minutes)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt LambdaDiscoveryFunction.Arn
+          Id: DiscoveryFunction
+
+  PermissionToInvoke:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref LambdaDiscoveryFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ScheduledDiscovery.Arn
+

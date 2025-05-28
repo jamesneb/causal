@@ -1,0 +1,629 @@
+/* Edgy High-Performance Theme for Causal */
+
+:root {
+  /* Primary colors - vibrant, electric */
+  --primary: #00FFAA;
+  --primary-light: #5CFFCB;
+  --primary-dark: #00CC88;
+  
+  /* Secondary colors - bold contrast */
+  --secondary: #FF3366;
+  --secondary-light: #FF6699;
+  --secondary-dark: #CC1A4A;
+  
+  /* Accent colors - popping, attention-grabbing */
+  --accent: #3399FF;
+  --accent-light: #66BBFF;
+  --accent-dark: #0066CC;
+  
+  /* Highlight color - ultra vibrant */
+  --highlight: #FFCC00;
+  
+  /* Background colors - high contrast dark theme */
+  --bg-darkest: #0A0A12;
+  --bg-darker: #0F0F1A;
+  --bg-dark: #14141E;
+  --bg-medium: #1A1A28;
+  
+  /* Text colors - sharp, clear */
+  --text-brightest: #FFFFFF;
+  --text-brighter: #F0F0F5;
+  --text-bright: #D0D0E0;
+  --text-medium: #A0A0B8;
+  --text-dim: #6A6A80;
+  
+  /* Status colors - vibrant for quick identification */
+  --success: #00FF99;
+  --warning: #FFAA00;
+  --error: #FF3333;
+  --info: #00CCFF;
+  
+  /* Chart colors - vibrant, distinct palette */
+  --chart-1: #00FFAA;
+  --chart-2: #FF3366;
+  --chart-3: #3399FF;
+  --chart-4: #FFCC00;
+  --chart-5: #9933FF;
+  --chart-6: #FF9900;
+  
+  /* Shadows with neon glow effect */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 2px rgba(0, 255, 170, 0.2);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4), 0 0 4px rgba(0, 255, 170, 0.3);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 255, 170, 0.4);
+  
+  /* Border radius - sharp angles */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  
+  /* Transitions - snappy, high-performance feel */
+  --transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Borders - sharp, defined edges */
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-heavy: rgba(255, 255, 255, 0.18);
+  
+  /* Gradients - dynamic, energetic */
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+  --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  --gradient-highlight: linear-gradient(135deg, var(--primary), var(--highlight));
+  
+  /* Performance-themed special effects */
+  --noise-overlay: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  --glow-primary: 0 0 10px rgba(0, 255, 170, 0.5);
+  --glow-secondary: 0 0 10px rgba(255, 51, 102, 0.5);
+  --glow-accent: 0 0 10px rgba(51, 153, 255, 0.5);
+  --glow-highlight: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+/* Global Resets & Base Styles */
+body {
+  background-color: var(--bg-darkest);
+  color: var(--text-bright);
+  font-family: 'Inter', 'Roboto Mono', monospace;
+  line-height: 1.5;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(0, 255, 170, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 90%, rgba(255, 51, 102, 0.03) 0%, transparent 20%),
+    linear-gradient(to bottom, var(--bg-darkest), var(--bg-dark));
+}
+
+/* Scrollbar Styling - minimalist, sleek */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Card Component - sharp edges, high contrast */
+.edgy-card {
+  background-color: var(--bg-darker);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  position: relative;
+}
+
+.edgy-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  opacity: 0.8;
+}
+
+.edgy-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  border-color: var(--border-medium);
+}
+
+.edgy-card:hover::after {
+  opacity: 1;
+}
+
+.edgy-card-header {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-dark);
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.edgy-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: var(--text-brighter);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.edgy-card-content {
+  padding: 16px;
+}
+
+.edgy-card-footer {
+  padding: 12px 16px;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  color: var(--text-medium);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Button Component - sharp, vibrant */
+.edgy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.edgy-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition-normal);
+}
+
+.edgy-btn:hover::after {
+  left: 100%;
+}
+
+.edgy-btn-primary {
+  background-color: var(--primary);
+  color: var(--bg-darkest);
+}
+
+.edgy-btn-primary:hover {
+  background-color: var(--primary-light);
+  box-shadow: var(--glow-primary);
+}
+
+.edgy-btn-secondary {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.edgy-btn-secondary:hover {
+  background-color: var(--secondary-light);
+  box-shadow: var(--glow-secondary);
+}
+
+.edgy-btn-accent {
+  background-color: var(--accent);
+  color: white;
+}
+
+.edgy-btn-accent:hover {
+  background-color: var(--accent-light);
+  box-shadow: var(--glow-accent);
+}
+
+.edgy-btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.edgy-btn-outline:hover {
+  background-color: rgba(0, 255, 170, 0.1);
+  box-shadow: var(--glow-primary);
+}
+
+.edgy-btn-icon {
+  margin-right: 8px;
+}
+
+/* Badge Component - vibrant, attention-grabbing */
+.edgy-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.edgy-badge-success {
+  background-color: rgba(0, 255, 153, 0.15);
+  color: var(--success);
+}
+
+.edgy-badge-warning {
+  background-color: rgba(255, 170, 0, 0.15);
+  color: var(--warning);
+}
+
+.edgy-badge-error {
+  background-color: rgba(255, 51, 51, 0.15);
+  color: var(--error);
+}
+
+.edgy-badge-info {
+  background-color: rgba(0, 204, 255, 0.15);
+  color: var(--info);
+}
+
+/* Input Component - sleek, minimalist */
+.edgy-input {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  color: var(--text-bright);
+  font-size: 14px;
+  width: 100%;
+  transition: var(--transition-fast);
+}
+
+.edgy-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+/* Table Component - crisp, clean lines */
+.edgy-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.edgy-table th {
+  background-color: var(--bg-dark);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-medium);
+  border-bottom: 1px solid var(--border-medium);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.edgy-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.edgy-table tr:hover td {
+  background-color: rgba(0, 255, 170, 0.03);
+}
+
+/* Tab Component - sleek, precision-focused */
+.edgy-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.edgy-tab {
+  padding: 12px 20px;
+  font-weight: 600;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  position: relative;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.edgy-tab:hover {
+  color: var(--text-brighter);
+}
+
+.edgy-tab.active {
+  color: var(--primary);
+}
+
+.edgy-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+}
+
+/* Status Indicators - vibrant, eye-catching */
+.edgy-status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 6px;
+  position: relative;
+}
+
+.edgy-status-indicator::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 4px;
+  animation: pulse-glow 1.5s infinite alternate;
+}
+
+.edgy-status-healthy {
+  background-color: var(--success);
+}
+
+.edgy-status-healthy::after {
+  border: 1px solid var(--success);
+}
+
+.edgy-status-warning {
+  background-color: var(--warning);
+}
+
+.edgy-status-warning::after {
+  border: 1px solid var(--warning);
+}
+
+.edgy-status-error {
+  background-color: var(--error);
+}
+
+.edgy-status-error::after {
+  border: 1px solid var(--error);
+}
+
+/* Section Title - bold, dynamic */
+.edgy-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-brighter);
+  margin-bottom: 16px;
+  position: relative;
+  padding-left: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.edgy-section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--gradient-primary);
+  border-radius: 0;
+}
+
+/* Utility Classes */
+.edgy-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.edgy-flex {
+  display: flex;
+}
+
+.edgy-flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* High-performance Micro-interactions */
+.edgy-hover-zoom {
+  transition: transform var(--transition-fast);
+}
+
+.edgy-hover-zoom:hover {
+  transform: scale(1.02);
+}
+
+.edgy-hover-glow {
+  transition: box-shadow var(--transition-normal);
+}
+
+.edgy-hover-glow:hover {
+  box-shadow: var(--glow-primary);
+}
+
+/* Chart accent elements */
+.edgy-chart-accent {
+  stroke: var(--primary);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 2px rgba(0, 255, 170, 0.5));
+}
+
+/* Performance indicator bar */
+.edgy-performance-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--bg-medium) 0%, var(--bg-medium) 100%);
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.edgy-performance-value {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  border-radius: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.edgy-performance-value::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: performance-pulse 2s infinite;
+}
+
+@keyframes performance-pulse {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Layout Components */
+.edgy-sidebar {
+  background-color: var(--bg-darker);
+  border-right: 1px solid var(--border-light);
+  position: relative;
+}
+
+.edgy-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+  opacity: 0.3;
+}
+
+.edgy-header {
+  background-color: var(--bg-darker);
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.edgy-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
+  opacity: 0.3;
+}
+
+/* Notifications */
+.edgy-notification {
+  background-color: var(--bg-dark);
+  border-left: 3px solid var(--primary);
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.edgy-notification::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary);
+}
+
+.edgy-notification-error::before {
+  background: var(--error);
+}
+
+.edgy-notification-warning::before {
+  background: var(--warning);
+}
+
+.edgy-notification-info::before {
+  background: var(--info);
+}
+
+/* Loading spinner - sleek, modern */
+.edgy-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 255, 170, 0.1);
+  border-radius: var(--radius-sm);
+  border-top-color: var(--primary);
+  animation: edgy-spin 0.6s linear infinite;
+}
+
+@keyframes edgy-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Logo styling */
+.edgy-logo {
+  font-weight: 800;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  position: relative;
+  letter-spacing: 1px;
+}
+
+.edgy-logo::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  color: transparent;
+  text-shadow: 0 0 5px rgba(0, 255, 170, 0.5);
+}

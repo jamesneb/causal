@@ -1,0 +1,126 @@
+:root {
+  /* SigNoz-inspired color palette */
+  --primary: #5661F2;
+  --primary-light: #6F78FF;
+  --primary-dark: #4048D4;
+  --secondary: #00BFA7;
+  --secondary-light: #27DFCA;
+  --secondary-dark: #00A38E;
+  --accent: #F28056;
+  --accent-light: #FF9B74;
+  --accent-dark: #D6703E;
+  
+  /* Base palette - Juniper & Copper (original with adjustments) */
+  --juniper-600: #4B7F6F;
+  --juniper-500: #5A9485;
+  --juniper-400: #6BA997;
+  --juniper-300: #84C2B0;
+  --copper-600: #A66A46;
+  --copper-500: #C27B50;
+  --copper-400: #D1916A;
+  --copper-300: #E1A785;
+  
+  /* Accent colors */
+  --nightshade: #49496B;
+  --amethyst: #9067C6;
+  --birch: #C9B45B;
+  --cinnabar: #E04E45;
+  
+  /* Neutral and background colors - Darker for SigNoz feel */
+  --carbon-900: #121220;
+  --carbon-800: #1A1A2E;
+  --carbon-700: #242438;
+  --carbon-600: #2D2D45;
+  --carbon-500: #3A4455;
+  --carbon-400: #4B5563;
+  --carbon-300: #6B7280;
+  
+  /* Text colors */
+  --text-light: #F9FAF9;
+  --text-primary: #F0F4F1;
+  --text-secondary: rgba(240, 244, 241, 0.7);
+  --text-dim: rgba(240, 244, 241, 0.5);
+
+  /* UI colors */
+  --bg-primary: var(--carbon-900);
+  --bg-secondary: var(--carbon-800);
+  --bg-tertiary: var(--carbon-700);
+  --bg-hover: rgba(86, 97, 242, 0.1);
+  --border-light: rgba(240, 244, 241, 0.1);
+  --border-medium: rgba(240, 244, 241, 0.15);
+  --border-active: var(--primary);
+  
+  /* Functional colors */
+  --success: #00C853;
+  --warning: #FFB300;
+  --error: #F5554A;
+  --info: var(--primary);
+  
+  /* Special effects */
+  --glow-primary: rgba(86, 97, 242, 0.5);
+  --glow-secondary: rgba(0, 191, 167, 0.5);
+  --glow-copper: rgba(194, 123, 80, 0.5);
+  --glow-amethyst: rgba(144, 103, 198, 0.5);
+  
+  /* UI Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-light));
+  --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+  --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-light));
+  
+  /* Chart colors */
+  --chart-1: var(--primary);
+  --chart-2: var(--secondary);
+  --chart-3: var(--accent);
+  --chart-4: var(--amethyst);
+  --chart-5: #56CCF2;
+  --chart-6: var(--birch);
+  
+  /* Legacy Variables for compatibility */
+  --quantum-purple: var(--primary);
+  --electric-teal: var(--secondary);
+  --insight-teal: var(--secondary-dark);
+  --debug-amber: var(--warning);
+  --error-coral: var(--error);
+  --causal-blue: var(--primary);
+  --synthesis-purple: var(--amethyst);
+}
+
+/* Utility classes for colors */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-accent { color: var(--accent); }
+.text-juniper { color: var(--juniper-500); }
+.text-copper { color: var(--copper-500); }
+.text-nightshade { color: var(--nightshade); }
+.text-amethyst { color: var(--amethyst); }
+.text-birch { color: var(--birch); }
+.text-cinnabar { color: var(--cinnabar); }
+.text-light { color: var(--text-light); }
+
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+.bg-juniper { background-color: var(--juniper-500); }
+.bg-copper { background-color: var(--copper-500); }
+.bg-nightshade { background-color: var(--nightshade); }
+.bg-amethyst { background-color: var(--amethyst); }
+.bg-birch { background-color: var(--birch); }
+.bg-cinnabar { background-color: var(--cinnabar); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-tertiary { background-color: var(--bg-tertiary); }
+
+/* Border utilities */
+.border-light { border-color: var(--border-light); }
+.border-medium { border-color: var(--border-medium); }
+.border-active { border-color: var(--border-active); }
+
+/* Status colors */
+.success { color: var(--success); }
+.warning { color: var(--warning); }
+.error { color: var(--error); }
+.info { color: var(--info); }
+
+.bg-success { background-color: var(--success); }
+.bg-warning { background-color: var(--warning); }
+.bg-error { background-color: var(--error); }
+.bg-info { background-color: var(--info); }

@@ -1,0 +1,365 @@
+/* SigNoz-inspired theme for Causal */
+
+:root {
+  /* Primary colors */
+  --primary: #5661F2;
+  --primary-light: #6F78FF;
+  --primary-dark: #4048D4;
+  
+  /* Secondary colors */
+  --secondary: #00BFA7;
+  --secondary-light: #27DFCA;
+  --secondary-dark: #00A38E;
+  
+  /* Accent colors */
+  --accent: #F28056;
+  --accent-light: #FF9B74;
+  --accent-dark: #D6703E;
+  
+  /* Background colors */
+  --bg-darkest: #121220;
+  --bg-darker: #1A1A2E;
+  --bg-dark: #242438;
+  --bg-medium: #2D2D45;
+  
+  /* Text colors */
+  --text-brightest: #FFFFFF;
+  --text-brighter: #F5F6F8;
+  --text-bright: #E2E4EA;
+  --text-medium: #B4B7C5;
+  --text-dim: #8A8D99;
+  
+  /* Status colors */
+  --success: #00C853;
+  --warning: #FFB300;
+  --error: #F5554A;
+  --info: #5661F2;
+  
+  /* Chart colors */
+  --chart-1: #5661F2;
+  --chart-2: #00BFA7;
+  --chart-3: #F28056;
+  --chart-4: #9C56F2;
+  --chart-5: #56CCF2;
+  --chart-6: #F2E256;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.25);
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+  
+  /* Borders */
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-medium: rgba(255, 255, 255, 0.1);
+  --border-heavy: rgba(255, 255, 255, 0.15);
+}
+
+/* Global Resets & Base Styles */
+body {
+  background-color: var(--bg-darkest);
+  color: var(--text-bright);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Card Component */
+.signoz-card {
+  background-color: var(--bg-darker);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.signoz-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--border-medium);
+}
+
+.signoz-card-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-dark);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.signoz-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: var(--text-brighter);
+}
+
+.signoz-card-content {
+  padding: 16px;
+}
+
+.signoz-card-footer {
+  padding: 12px 16px;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: var(--text-medium);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Button Component */
+.signoz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.signoz-btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.signoz-btn-primary:hover {
+  background-color: var(--primary-light);
+}
+
+.signoz-btn-secondary {
+  background-color: var(--bg-medium);
+  color: var(--text-bright);
+  border: 1px solid var(--border-medium);
+}
+
+.signoz-btn-secondary:hover {
+  background-color: var(--bg-dark);
+  border-color: var(--border-heavy);
+}
+
+.signoz-btn-icon {
+  margin-right: 8px;
+}
+
+/* Badge Component */
+.signoz-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.signoz-badge-success {
+  background-color: rgba(0, 200, 83, 0.15);
+  color: var(--success);
+}
+
+.signoz-badge-warning {
+  background-color: rgba(255, 179, 0, 0.15);
+  color: var(--warning);
+}
+
+.signoz-badge-error {
+  background-color: rgba(245, 85, 74, 0.15);
+  color: var(--error);
+}
+
+.signoz-badge-info {
+  background-color: rgba(86, 97, 242, 0.15);
+  color: var(--primary-light);
+}
+
+/* Input Component */
+.signoz-input {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  color: var(--text-bright);
+  font-size: 14px;
+  width: 100%;
+  transition: var(--transition-fast);
+}
+
+.signoz-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(86, 97, 242, 0.2);
+}
+
+/* Table Component */
+.signoz-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.signoz-table th {
+  background-color: var(--bg-dark);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-medium);
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.signoz-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.signoz-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Tab Component */
+.signoz-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.signoz-tab {
+  padding: 12px 24px;
+  font-weight: 500;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.signoz-tab:hover {
+  color: var(--text-brighter);
+}
+
+.signoz-tab.active {
+  color: var(--primary-light);
+}
+
+.signoz-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+}
+
+/* Utility Classes */
+.signoz-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-brighter);
+  margin-bottom: 16px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.signoz-section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 4px;
+  background-color: var(--primary);
+  border-radius: 2px;
+}
+
+.signoz-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.signoz-flex {
+  display: flex;
+}
+
+.signoz-flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signoz-mt-1 { margin-top: 4px; }
+.signoz-mt-2 { margin-top: 8px; }
+.signoz-mt-3 { margin-top: 12px; }
+.signoz-mt-4 { margin-top: 16px; }
+.signoz-mt-5 { margin-top: 20px; }
+.signoz-mt-6 { margin-top: 24px; }
+
+.signoz-mb-1 { margin-bottom: 4px; }
+.signoz-mb-2 { margin-bottom: 8px; }
+.signoz-mb-3 { margin-bottom: 12px; }
+.signoz-mb-4 { margin-bottom: 16px; }
+.signoz-mb-5 { margin-bottom: 20px; }
+.signoz-mb-6 { margin-bottom: 24px; }
+
+.signoz-p-1 { padding: 4px; }
+.signoz-p-2 { padding: 8px; }
+.signoz-p-3 { padding: 12px; }
+.signoz-p-4 { padding: 16px; }
+.signoz-p-5 { padding: 20px; }
+.signoz-p-6 { padding: 24px; }
+
+/* Status Indicators */
+.signoz-status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.signoz-status-healthy {
+  background-color: var(--success);
+  box-shadow: 0 0 6px var(--success);
+}
+
+.signoz-status-warning {
+  background-color: var(--warning);
+  box-shadow: 0 0 6px var(--warning);
+}
+
+.signoz-status-error {
+  background-color: var(--error);
+  box-shadow: 0 0 6px var(--error);
+}
