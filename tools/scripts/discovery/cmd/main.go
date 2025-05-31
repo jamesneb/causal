@@ -6,5 +6,7 @@ func main() {
 	discoverycmd.RootCmd.AddCommand(discoverycmd.GetListCmd())
 	
 	discoverycmd.Execute()
+
+	discoverycmd.HandleRegionArgument()
 }
 
