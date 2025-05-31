@@ -31,7 +31,7 @@ func GetListCmd() *cobra.Command {
 
 // Begin manual instrumentation 
 
-func HandleSelectedRegion() {
+func HandleRegionArgument() {
 
 		switch (SelectedRegion) {
 			case "ALL": BuildAllRegions()
