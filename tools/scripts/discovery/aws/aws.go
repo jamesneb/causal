@@ -1,19 +1,16 @@
-package aws
+package awscmd
 
 import (
 	"context"
-	"encoding/base32"
 	"fmt"
-	"net/http"
 	"sync"
-	"time"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	stscreds "github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/aws-sdk-go-v2/credentials"
 )
 
 type Service struct {
@@ -77,14 +74,43 @@ func CreateSTSClient(cfg aws.Config) *sts.Client {
 	return client 
 }
 
-func CreateRoleCredentials(stsClient sts.Client, roleArn string) *stscreds.AssumeRoleProvider {
+func AssumeWebIdentityRole(region, idToken, roleArn string, sessionName string) (aws.Config, error) {
+	ctx := context.TODO()
 
-	roleCredentials := stscreds.NewAssumeRoleProvider(&stsClient, roleArn, func(o *stscreds.AssumeRoleOptions) {
+	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(region))
+	if err != nil {
+		return aws.Config{}, err
+	}
 
-	o.RoleSessionName = fmt.Sprintf("Probe Session-%s", time.Now().Format("20060102T150405"))
-	o.Duration = time.Hour
+	stsClient := CreateSTSClient(cfg)
+	result, err := stsClient.AssumeRoleWithWebIdentity(context.TODO(),&sts.AssumeRoleWithWebIdentityInput{
+
+	RoleArn:	aws.String(roleArn),
+	RoleSessionName: aws.String(sessionName),
+	WebIdentityToken: aws.String(idToken),
+	DurationSeconds: aws.Int32(3600),
+
+
+
 	})
-	return roleCredentials
+	if err != nil {
+		return aws.Config{}, err
+	}
+
+	creds := aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider(
+
+		*result.Credentials.AccessKeyId,
+		*result.Credentials.SecretAccessKey,
+		*result.Credentials.SessionToken,
+
+		))
+
+	
+	return aws.Config {
+		Region: region,
+		Credentials: creds,
+	}, nil
+
 }
 
 func CreateIAMConfig(roleCredentials *stscreds.AssumeRoleProvider, baseCfg aws.Config, region string) aws.Config {
@@ -175,7 +201,7 @@ func CatalogLambdas(cfg aws.Config) {
 					service.Tags[k] = v
 				}
 			}
-			
+			fmt.Println(service)	
 			// Return service to pool when done
 			PutService(service)
 		}
@@ -185,25 +211,15 @@ func CatalogLambdas(cfg aws.Config) {
 	
 
 
-func CatalogServices(region string, roleArn string) {
+func CatalogServices(region string, roleArn string, idToken string, sessionName string) error {
 
-
-	
-	baseCfg, err := SetupBaseConfig()
-
+	cfg, err := AssumeWebIdentityRole(region, idToken, roleArn, sessionName)	
 	if err != nil {
-		
-		fmt.Printf("failed to load config, %v", err)
-		return
+		return fmt.Errorf("problem assuming web identity role: %w", err)
 	}
-
-	stsClient := CreateSTSClient(baseCfg)
-  
-	roleProvider := CreateRoleCredentials(stsClient, roleArn)
-
-	cfg := CreateIAMConfig(roleProvider, baseCfg, region)
-	
 	// LAMBDA
 
 	CatalogLambdas(cfg)
+	
+	return nil
 }
